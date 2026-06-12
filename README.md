@@ -5,7 +5,7 @@ Stage L2 physique
 
 ### 📘 Compte-rendu et Documentation
 Pour suivre l'avancée du projet, les recherches et l'ensemble de la documentation, vous pouvez consulter le notebook principal :
-👉 **[Accéder au compte-rendu (cr_stage.ipynb)](./cr_stage.ipynb)**
+👉 **[Accéder au compte-rendu](./cr_stage.ipynb)**
 
 ---
 
