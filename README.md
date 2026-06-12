@@ -1,5 +1,5 @@
 # Robot-Puma
-Stage L2 physique
+Stage L2 physique /n
 *Par Erwan Maugeri et Charles-Antoine Maisonneuve*
 
 ## Avancement et Expérimentations
