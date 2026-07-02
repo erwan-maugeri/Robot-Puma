@@ -1,19 +1,53 @@
 # Robot-Puma
-Stage L2 physique <br>
-*Par Erwan Maugeri et Charles-Antoine Maisonneuve*
 
-## Avancement et Expérimentations
+Projet réalisé dans le cadre d'un stage de L2 Physique.
 
-### Compte-rendu et Documentation
-Pour suivre l'avancée du projet, les recherches et l'ensemble de la documentation, vous pouvez consulter le notebook principal :
-**[Accéder au compte-rendu](./cr_stage.ipynb)**
+**Auteurs :**
+- Erwan Maugeri
+- Charles-Antoine Maisonneuve
 
 ---
 
-### Tests et Visualisation 3D
-Un fichier de test spécifique est également à disposition. Il est conçu pour manipuler et d'expérimenter plus librement (notamment avec les graphe 3D dans VS Code):
-**[Accéder au fichier de test](./test_file.py)**
+## Contenu du dépôt
 
-**Pourquoi utiliser ce fichier de test ?**
-* **Copier-coller rapide :** Copier-coller des cellules de code ou des blocs du compte-rendu pour faire des essais complets
-* **Navigation 3D fluide :** Un fichier python permet de "se promener", de zoomer et de faire pivoter les rendus 3D de manière interactive (à la souris) ce que ne permettent pas les cellules notebook.
+Le dépôt est organisé autour de trois fichiers principaux :
+
+| Fichier | Description |
+|---------|-------------|
+| `rapport_stage.pdf` | Rapport final présentant la démarche, les résultats et les conclusions du projet. |
+| `notebook_recherche.ipynb` | Notebook ayant servi aux recherches, aux calculs et aux expérimentations. Il contient les développements intermédiaires ayant conduit au rapport final. |
+| `test_visualisation.py` | Script permettant de réaliser des essais indépendants et de visualiser les résultats 3D de manière interactive. |
+
+---
+
+## Notebook de recherche
+
+Il s'agit d'un notebook structuré regroupant :
+
+- les recherches effectuées pendant le stage
+- les calculs et développements intermédiaires
+- les expérimentations réalisées au cours du projet
+
+Il constitue le support de travail ayant servi à la rédaction du rapport final.
+
+---
+
+## Visualisation 3D
+
+Le script `test_visualisation.py` permet de travailler plus confortablement avec les visualisations 3D.
+
+Il est notamment utile pour :
+
+- tester rapidement une portion de code issue du notebook
+- manipuler librement les représentations 3D (rotation, zoom, déplacement de la caméra) directement dans VS Code ou un environnement Python
+(sous reserve de copier les bonnes cellules python depuis le Notebook de recherche)
+
+---
+
+## Rapport final
+
+Le rapport complet est disponible dans :
+
+**[`rapport_stage.pdf`](./rapport_stage.pdf)**
+
+Il présente la méthodologie, les résultats obtenus ainsi que les conclusions du projet.
