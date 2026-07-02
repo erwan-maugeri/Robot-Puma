@@ -10,9 +10,9 @@ Le dépôt est organisé autour de trois fichiers principaux :
 
 | Fichier | Description |
 |---------|-------------|
-| `rapport_stage.pdf` | Rapport final présentant la démarche, les résultats et les conclusions du projet. |
-| `notebook_recherche.ipynb` | Notebook ayant servi aux recherches, aux calculs et aux expérimentations. Il contient les développements intermédiaires ayant conduit au rapport final. |
-| `test_visualisation.py` | Script permettant de réaliser des essais indépendants et de visualiser les résultats 3D de manière interactive. |
+| [`rapport_stage.pdf`](./rapport_stage.pdf) | Rapport final présentant la démarche, les résultats et les conclusions du projet. |
+| [`notebook_recherche.ipynb`](./notebook_recherche.ipynb) | Notebook ayant servi aux recherches, aux calculs et aux expérimentations. Il contient les développements intermédiaires ayant conduit au rapport final. |
+| [`test_visualisation.py`](./test_visualisation.py) | Script permettant de réaliser des essais indépendants et de visualiser les résultats 3D de manière interactive. |
 
 ## Notebook de recherche
 
@@ -26,7 +26,7 @@ Il constitue le support de travail ayant servi à la rédaction du rapport final
 
 ## Visualisation 3D
 
-Le script **[`test_visualisation.py`](./test_visualisation.py)** permet de travailler plus confortablement avec les visualisations 3D.
+Le script [`test_visualisation.py`](./test_visualisation.py) permet de travailler plus confortablement avec les visualisations 3D.
 
 Il est notamment utile pour :
 
