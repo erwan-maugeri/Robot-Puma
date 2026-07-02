@@ -1,10 +1,8 @@
 # Robot-Puma
 
-Projet réalisé dans le cadre d'un stage de L2 Physique.
+*Par Erwan Maugeri, Charles-Antoine Maisonneuve*
 
-**Auteurs :**
-- Erwan Maugeri
-- Charles-Antoine Maisonneuve
+Ce projet a été réalisé dans le cadre d’un stage de Licence 2 Physique au Laboratoire d’Ingénierie des Systèmes de Versailles (LISV). Il porte sur la modélisation et la simulation en Python d’un robot manipulateur de type PUMA. Les travaux abordent la géométrie directe et inverse, la modélisation par les paramètres de Denavit-Hartenberg, l’étude du workspace ainsi que le suivi de trajectoires, avec des visualisations interactives en 3D.
 
 ## Contenu du dépôt
 
@@ -36,8 +34,6 @@ Il est notamment utile pour :
 - manipuler librement les représentations 3D (rotation, zoom, déplacement de la caméra) directement dans VS Code ou un environnement Python
 
 (sous reserve de copier les bonnes cellules python depuis le Notebook de recherche)
-
----
 
 ## Rapport final
 
