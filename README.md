@@ -26,7 +26,7 @@ Il constitue le support de travail ayant servi à la rédaction du rapport final
 
 ## Visualisation 3D
 
-Le script `test_visualisation.py` permet de travailler plus confortablement avec les visualisations 3D.
+Le script **[`test_visualisation.py`](./test_visualisation.py)** permet de travailler plus confortablement avec les visualisations 3D.
 
 Il est notamment utile pour :
 
@@ -39,6 +39,6 @@ Il est notamment utile pour :
 
 Le rapport complet est disponible dans :
 
-**[`rapport_stage.pdf`](./rapport_stage.pdf)**
+[`rapport_stage.pdf`](./rapport_stage.pdf)
 
 Il présente la méthodologie, les résultats obtenus ainsi que les conclusions du projet.
