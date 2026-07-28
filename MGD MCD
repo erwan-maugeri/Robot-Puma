@@ -1,0 +1,237 @@
+#MGD
+
+import numpy as np
+
+d1 = 100 #buste
+d2 = 80 #bras
+d3 = 50 #avant-bras
+
+
+def DH(theta, d, a, alpha):
+    ct, st = np.cos(theta), np.sin(theta)
+    ca, sa = np.cos(alpha), np.sin(alpha)
+    return np.array([
+        [ct, -st*ca,  st*sa, a*ct],
+        [st,  ct*ca, -ct*sa, a*st],
+        [ 0,     sa,     ca,    d],
+        [ 0,      0,      0,    1]
+    ])
+
+
+def MGD(q1, q2, q3):
+    
+    T01 = DH(q1,d1,0,np.pi/2)
+    T12 = DH(q2,0, d2,  0)
+    T23 = DH(q3,0,d3,0)
+
+    T03 = T01 @ T12 @ T23
+    return T03[:3, 3]
+
+q1 = np.deg2rad(0)
+q2 = np.deg2rad(0)
+q3 = np.deg2rad(90)
+
+p=MGD(q1,q2,q3)
+
+print(p)
+
+
+#MCD
+
+import numpy as np
+
+def J(q1, q2, q3):
+
+    r = d2*np.cos(q2) + d3*np.cos(q2+q3)
+
+    J = np.array([
+
+        [-r*np.sin(q1),
+         (-d2*np.sin(q2) - d3*np.sin(q2+q3))*np.cos(q1),
+         -d3*np.sin(q2+q3)*np.cos(q1)],
+
+        [r*np.cos(q1),
+         (-d2*np.sin(q2) - d3*np.sin(q2+q3))*np.sin(q1),
+         -d3*np.sin(q2+q3)*np.sin(q1)],
+
+        [0,
+         d2*np.cos(q2) + d3*np.cos(q2+q3),
+         d3*np.cos(q2+q3)]
+    ])
+
+    return J
+
+#vitesse angulaire en rad/s
+dq1=0.3
+dq2=1
+dq3=0.5
+
+dq= [dq1,dq2,dq3]
+
+v=J(q1,q2,q3) @ dq
+print("v en cm/s",v)
+
+
+
+#vérification des position ou le robot perd degré de liberté 
+#quand le robot perd une direction de ouvement indépendante
+detJ = np.linalg.det(J(q1,q2,q3))
+print("detJ",detJ)
+
+#liste de stockage de la trajecoitee
+traj_x=[]
+traj_y=[]
+traj_z=[]
+#boucle mouvement continue
+
+
+#position cible
+x_cible = 100
+y_cible = 25
+z_cible = 115
+
+dist = np.sqrt(x_cible**2 + y_cible**2 + (z_cible - d1)**2)
+
+K = 0.5  # gain 
+
+dt=0.01
+t=0
+
+R=d1+d2+d3
+
+distance=0
+
+epsilon=0.1
+
+prev_x, prev_y, prev_z = None, None, None
+
+if dist > R:
+
+    raise SystemExit(" Position impossible")
+else:
+
+    for i in range(10000):
+        x,y,z=MGD(q1,q2,q3) #position actuelle
+        print(x,y,z)
+        
+
+
+        #écrat entre postion souhaité et postion actuelle
+        e = np.array([
+            x_cible - x,
+            y_cible - y,
+            z_cible - z
+        ])
+
+        print("ERREUR =", e)
+
+        if np.linalg.norm(e) < epsilon:
+            print("Position atteinte")
+            break
+        else:
+
+
+
+            #vitesse outil
+            v = K * e
+
+            print("VITESSE =", v)
+
+
+            Jmat = J(q1, q2, q3)
+
+            dq = np.linalg.pinv(Jmat) @ v  #inverse de Jmat * v
+
+            print("dq =", dq)
+    
+            #mise à jour des angles
+            q1 +=dq[0]*dt
+            q2 += dq[1]*dt
+            q3 += dq[2]*dt
+
+            if prev_x is not None:
+                step = np.sqrt(
+                    (x-prev_x)**2 + 
+                    (y-prev_y)**2 +
+                    (z - prev_z)**2
+                )
+                print("step",step)
+                distance +=step
+
+            t+=dt
+            prev_x,prev_y,prev_z=x,y,z
+
+            traj_x.append(x)
+            traj_y.append(y)
+            traj_z.append(z)
+
+
+
+    print("POSITION FINALE:",x,y,z)
+
+
+    print("temps de trajet en secondes:",t)
+
+    print("distance totale en cm:",distance)
+
+
+    v_moy=distance/t
+    
+    print("vitesse moyenne en cm/s:",v_moy)
+    
+ 
+    #graphe 3d
+    import matplotlib.pyplot as plt
+    from mpl_toolkits.mplot3d import Axes3D
+
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+
+    ax.plot(traj_x, traj_y, traj_z, label="Trajectoire", linewidth=2)
+
+    ax.scatter(x_cible, y_cible, z_cible, color='red', s=80, label="Cible")
+
+    ax.scatter(traj_x[0], traj_y[0], traj_z[0], color='green', s=80, label="Départ")
+
+
+
+    #position final du robot
+
+    # buste
+    xA = 0
+    yA = 0
+    zA = d1
+
+    #bras
+    rB = d2 * np.cos(q2)
+
+    xB = rB * np.cos(q1)
+    yB = rB * np.sin(q1)
+    zB = d1 + d2 * np.sin(q2)
+
+    # avant bras
+    rC = d2*np.cos(q2) + d3*np.cos(q2+q3)
+
+    xC = rC * np.cos(q1)
+    yC = rC * np.sin(q1)
+    zC = d1 + d2*np.sin(q2) + d3*np.sin(q2+q3)
+
+
+    #affichage robot
+    
+    ax.plot(
+    [0, xA, xB, xC],
+    [0, yA, yB, yC],
+    [0, zA, zB, zC],
+    'o-',
+    linewidth=3,
+    color='black',
+    label="Robot")
+
+    ax.set_xlabel("X")
+    ax.set_ylabel("Y")
+    ax.set_zlabel("Z")
+
+    ax.legend()
+    ax.grid(True)
+    plt.show
